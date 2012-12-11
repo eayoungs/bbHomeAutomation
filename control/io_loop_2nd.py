@@ -40,7 +40,7 @@ def off(lightID):
 def setup():
     for but in button_list:
         digital.append((but.pin,but))
-        if but.lockable:
+        if but.setto:
             event_loop.add_event(DigitalTrigger(but.pin, HIGH, on(but.getLightID()), 50))
         else:
             event_loop.add_event(DigitalTrigger(but.pin, HIGH, off(but.getLightID()), 50))

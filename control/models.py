@@ -1,10 +1,19 @@
 from django.db import models
 from django.contrib import admin
 
-# Create your models here.
+class Pins(models.Model):
+    headerchoice = (('P8','P8'), ('P9', 'P9'))
+    id = models.AutoField(primary_key=True)
+    pin = models.CharField(max_length=128)
+    pinnum = models.CharField(max_length=128)
+    pinheader = models.CharField(max_length=2, choices=headerchoice)
+
+    def __unicode__(self):
+        return self.pin
+
 class Lights(models.Model):
     id = models.AutoField(primary_key=True)
-    pin = models.IntegerField()
+    pin = models.OneToOneField(Pins)
     description = models.TextField()
     location = models.TextField()
     lockable = models.BooleanField()
@@ -39,10 +48,10 @@ class SwitchBindings(models.Model):
 
 class Switches(models.Model):
     id = models.AutoField(primary_key=True)
-    pin = models.IntegerField()
+    pin = models.OneToOneField(Pins)
     description = models.TextField()
     location = models.TextField()
-    lockable = models.BooleanField()
+    setto = models.BooleanField()
     binding = models.ForeignKey(SwitchBindings)
 
     def __unicode__(self):

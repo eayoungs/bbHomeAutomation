@@ -11,9 +11,7 @@ from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
-
-import io
-
+import lightio
 def index(request):
     light_list = Lights.objects.all().order_by('id')
     return render_to_response('lights/index.html', {'lightlist': light_list})
@@ -41,8 +39,7 @@ def lighton(request, light_id):
         raise Http404
     lightdetails = Lights.objects.get(id=light_id)
     lightstatus = LightStatus.objects.get(id=light_id)
-    print lightdetails.pin
-    io.set(light_id, True)
+    lightio.setPin(lightdetails.pin.pin, True)
     light_list = Lights.objects.all().order_by('id')
     randomnum = User.objects.make_random_password(length=10, allowed_chars='123456789')
     return render_to_response('lights/light.html',
@@ -61,7 +58,7 @@ def lightoff(request, light_id):
         raise Http404
     lightdetails = Lights.objects.get(id=light_id)
     lightstatus = LightStatus.objects.get(id=light_id)
-    io.set(light_id, False)
+    lightio.setPin(lightdetails.pin.pin, False)
     light_list = Lights.objects.all().order_by('id')
     randomnum = User.objects.make_random_password(length=10, allowed_chars='123456789')
     return render_to_response('lights/light.html',
@@ -86,16 +83,16 @@ def button(request, btn_id):
         buttonbind = buttons.binding
         lid = buttonbind.light.id
         lightdetails = buttonbind.light
-        if buttons.lockable == True:
+        if buttons.setto == True:
             lightstatus = LightStatus.objects.get(id=lid)
             lightstatus.status = True
             lightstatus.save()
-            io.set(lightdetails.id, True)
+            lightio.set(lightdetails.id, True)
         else:
             lightstatus = LightStatus.objects.get(id=lid)
             lightstatus.status = True
             lightstatus.save()
-            io.set(lightdetails.id, False)
+            lightio.set(lightdetails.id, False)
     return HttpResponse("1")
 
 def allon(request):
@@ -107,7 +104,7 @@ def allon(request):
             lightstatus.save()
             b = LightHistory(light=light, tostatus=True, userid='0', method='1')
             b.save()
-            #io.setpin(light.pin, True) -- re-enable once on BB
+            lightio.setpin(light.pin.pin, True)
 
     except LightStatus.DoesNotExist:
         raise Http404
