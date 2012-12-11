@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block body %}
+<div data-role="page" class="type-home">
+	<div data-role="content">
+		<p class="jqm-version"></p>
+
+		<div class="content-secondary">
+{% load staticfiles %}
+			<div id="jqm-homeheader">
+				<h1 id="jqm-logo"><img src="{% static 'images/front.jpg' %}" alt="jQuery Mobile Framework" /></h1>
+				<p>Shed HAC</p>
+			</div>
+
+
+			<p class="intro"><strong>Welcome.</strong> to Kyle and Spencer's Shed Automation System.</p>
+
+			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
+				<li data-role="list-divider">Controls</li>
+				<li><a href="{% url control.views.index%}">Lights</a></li>
+				<li><a href="#">HVAC</a></li>
+				<li><a href="#">Door Locks</a></li>
+				<li><a href="#">Security</a></li>
+				<li><a href="#">Audio</a></li>
+			</ul>
+
+		</div><!--/content-primary-->
+
+		<div class="content-primary">
+			<nav>
+
+
+				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
+					<li data-role="list-divider">More Controls</li>
+					<li><a href="#">Account</a></li>
+					<li><a href="#">Currently Online</a></li>
+					<li><a href="#">Security Camera</a></li>
+					<li><a href="#">Administration</a></li>
+					<li data-role="list-divider">About</li>
+					<li><a href="#">Pictures</a></li>
+					<li><a href="#">Instructions</a></li>
+
+
+				</ul>
+			</nav>
+		</div>
+
+
+
+	</div>
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>&copy; 2012 Kyle Deane</p>
+	</div>
+
+</div>
+{% endblock %}

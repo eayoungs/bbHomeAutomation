@@ -1,0 +1,31 @@
+{% extends "lights/base_lights.html" %}
+{% block title %}Light History{% endblock %}
+
+{% block content %}
+{% load staticfiles %}
+<div class="content-primary">
+{% for item in history %}
+<div data-role="collapsible">
+   <h3>Turned {{item.tostatus|yesno:"On,Off,Unknown"}}: {{ item.timestamp }}</h3>
+   <table>
+   		<tr>
+   			<td width="100px">{% if item.tostatus %}<img src="{% static "images/lightb_on.jpg" %}" width="100px">
+   			{% else %}<img src="{% static "images/lightb_off.jpg" %}" width="100px">{% endif %}</td>
+   			<td>
+   				Turned {{item.tostatus|yesno:"On,Off,Unknown"}}
+   			</td>
+   		</tr>
+   		<tr>
+   			<td>User:</td>
+   			<td>xxx</td>
+   		</tr>
+   		<tr>
+   		<td>Method:</td>
+   		<td>ph</td>
+   		</tr>
+   </table>
+</table>
+</div>
+{% endfor %}
+</div>
+{% endblock %}

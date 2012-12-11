@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Shed HAC: Lights{% endblock %}
+{% block topbar %}
+{% load staticfiles %}
+<div id="leftnav">
+	<a href="{% url main.views.app_index %}"><img alt="home" src="{% static "images/home.png" %}"></a>
+	<a href="{% url control.views.light light_id=light.id %}">Light</a></div>
+	<div id="title">
+		Lights</div>
+{% endblock %}
+{% block tributton %}{% endblock %}
+{% block bodyclass %}{% endblock %}
+{% block content %}
+<span class="graytitle">{{light.description}}</span>
+<ul class="pageitem">
+{% for item in history %}
+	<li class="menu">
+		{% if item.tostatus %}
+		<img alt="" src="{% static "images/light_on.jpg" %}" height="30px">
+		{% else %}
+		<img alt="" src="{% static "images/light_off.jpg" %}" height="30px">
+		{% endif %}
+		<span class="name">Turned {{item.tostatus|yesno:"On,Off,Unknown"}}: {{ item.timestamp }}</span>
+		<span class="comment">User: xxx</span>
+	</li>
+	
+{% endfor %}
+</ul>
+
+{% endblock %}

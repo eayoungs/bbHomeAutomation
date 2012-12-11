@@ -1,0 +1,12 @@
+/apache/
+/bin/
+/lib/
+/include/
+/db
+/logs
+/templates_old/
+.DS_Store
+/.idea
+/.Python
+/PyBBIO-master/
+/build/

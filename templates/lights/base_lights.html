@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block body %}
+<div data-role="page" class="type-interior" id="album-list">
+
+		<div data-role="header" data-theme="f">
+		<h1>Lights</h1>
+		<a href="../../" data-icon="back" data-rel="back" data-iconpos="notext" data-direction="reverse">Back</a>
+		<a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Search</a>
+	</div><!-- /header -->
+{% if all == "1" %}
+    <div class="ui-bar ui-bar-c">
+        <h3>All Lights Turned On</h3>
+    </div>
+{% elif all == "2" %}
+    <div class="ui-bar ui-bar-c">
+        <h3>All Lights Turned Off</h3>
+    </div>
+{%  endif %}
+
+{% if message %}
+    <div class="ui-bar ui-bar-b">
+        <h3>{{ message.content }}</h3>
+    </div>
+{% endif %}
+	{% block content %}
+	{% endblock %}
+	<div class="content-secondary">
+
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+					<h3>All Lights</h3>
+					<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+						<li data-role="list-divider"><a href="{% url control.views.index %}">Lights</a></li>
+						{% for lightss in lightlist %}
+							{% if light %}
+								{% if lightss.id = light.id %}
+									<li data-theme="b"><a href="{% url control.views.light light_id=lightss.id %}">{{lightss.description}}</a></li>
+								{% else %}
+								<li><a href="{% url control.views.light light_id=lightss.id %}">{{lightss.description}}</a></li>
+								{% endif %}
+							{% else %}
+								<li><a href="{% url control.views.light light_id=lightss.id %}">{{lightss.description}}</a></li>
+							{% endif %}
+						{% endfor %}
+						
+
+			</div>
+		</div>	
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "lights/base_lights.html" %}
+{% block title %}Lights{% endblock %}
+{% block content %}
+<div class="content-primary">	
+<a href="{% url control.views.allon %}?CACHE={{ rand }}" data-role="button">Turn All Lights On</a>
+<a href="{% url control.views.alloff %}?CACHE={{ rand }}" data-role="button">Turn All Lights Off</a>
+</div>
+{% endblock %}

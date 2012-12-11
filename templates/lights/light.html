@@ -1,0 +1,54 @@
+{% extends "lights/base_lights.html" %}
+{% block title %}Lights{% endblock %}
+
+{% block content %}
+<div class="content-primary">
+<table width="100%">
+<tr>
+{% load staticfiles %}
+<td width="100px">{% if light.getLightStatus %}<img src="{% static "images/lightb_on.jpg" %}" width="100px">{% else %}<img src="{% static "images/lightb_off.jpg" %}" width="100px">{% endif %}</td>
+<td width="90%">
+	<table>
+		<tr width="100%">
+			<h2>{{light.description}}</h2>
+		</tr>
+		<tr width="100%">
+			<small>Currently: {{light.getLightStatus|yesno:"On,Off,Unknown"}}</small>
+		</tr>
+	</table>
+</td>
+</tr>
+</table>
+<div data-role="collapsible">
+   <h3>Advanced</h3>
+   <table>
+	<tr>
+		<td>Pin</td>
+		<td>{{light.pin}}</td>
+	</tr>
+	<tr>
+		<td>Description</td>
+		<td>{{light.description}}</td>
+	</tr>
+	<tr>
+		<td>Location</td>
+		<td>{{light.location}}</td>
+	</tr>
+	<tr>
+		<td>Lockable</td>
+		<td>{{light.lockable}}</td>
+	</tr>
+</table>
+</div>
+{% if light.getLightStatus %}
+	<a class="force-reload" href="{% url control.views.lightoff light_id=light.id %}?CACHE={{rand}}" data-role="button">Turn Light Off</a>
+{% else %}
+	<a class="force-reload" href="{% url control.views.lighton light_id=light.id %}?CACHE={{rand}}" data-role="button">Turn Light On</a>
+{% endif %}
+
+<a href="{% url control.views.lighthistory light_id=light.id %}" data-icon="grid" data-role="button">View Full History</a>
+
+
+
+</div>
+{% endblock %}
