@@ -1,9 +1,5 @@
 
-import logging
-from control.models import Switches
-from control.models import SwitchBindings
-
-
+#ARDUINO FOR ORIGINAL PROJECT TESTING / PROTOTYPE. NO LONGER ACTIVE. CODE HERE FOR REFERENCE.
 PORT = '/dev/ttyACM0'
 board = pyfirmata.Arduino(PORT)
 digital = []

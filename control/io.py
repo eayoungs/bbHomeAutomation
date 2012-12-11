@@ -27,10 +27,10 @@ def setPin(pin, status):
         lightstatus = LightStatus.objects.get(id=lightdetails.id)
         lightstatus.status = True
         lightstatus.save()
-        #digitalWrite(lightdetails.pin, True)
+        #digitalWrite(pin, True)
     else:
         lightstatus = LightStatus.objects.get(id=pid)
         lightstatus.status = False
         lightstatus.save()
         lightdetails = Lights.objects.get(id=pid)
-        #digitalWrite(lightdetails.pin, True)
+        #digitalWrite(pin, True)
