@@ -48,11 +48,9 @@ class Switches(models.Model):
     def __unicode__(self):
         return self.description
 
-    #def getLightID(self):
-    #	lightdetails = SwitchBindings.objects.get(self)
-    #	return lightdetails.light.id
-    #	getLightID = property(getLightID)
-
+    def getLightID(self):
+        lightdetails = SwitchBindings.objects.get(self)
+        return lightdetails.light.id
     #simage = models.ImageField(upload_to='/images')
 
 
